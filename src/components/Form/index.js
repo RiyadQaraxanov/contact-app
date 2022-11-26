@@ -1,28 +1,30 @@
 import {useState} from 'react'
 
-function Form(form) {
+function Form({onPrint, contacts}) {
 
-  const [fomr, setForm] = useState({fullname: '', number: ''})
+  const [form, setForm] = useState({fullname: '', number: ''})
 
   const onChangeInput =(e)=>{
-    setForm({...Form, [e.target.name]: e.target.value})
+    setForm({...form, [e.target.name]: e.target.value})
   }
 
   const onSubmit = (e) =>{
     e.preventDefault()
-    console.log(form)
+    if(form.fullname === '' || form.number === '') return false;
+    onPrint([...contacts,form])
+    setForm({fullname:'',number:''});
   }
 
   return (
     <div>
       <form onSubmit={onSubmit} >
         <div>
-            <input name='fullname' placeholder='Full Name' onChange={()=>onChangeInput}/>
+            <input name='fullname' value={form.fullname} placeholder='Full Name' onChange={onChangeInput}/>
         </div>
         <div>
-            <input name='number' placeholder='Number' onChange={()=>onChangeInput}/>
+            <input name='number' value={form.number} placeholder='Number' onChange={onChangeInput}/>
         </div>
-        <button onCLick={()=>onSubmit}>Add</button>
+        <button>Add</button>
       </form>
     </div>
   )

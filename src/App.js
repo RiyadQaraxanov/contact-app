@@ -1,13 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
-import List from './components/List';
-import Form from './components/Form';
+import Contact from './components';
 
 function App() {
   return (
     <div className="App">
-      <List />
-      <Form />
+      <Contact />
     </div>
   );
 }
